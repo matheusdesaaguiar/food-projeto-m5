@@ -1,14 +1,18 @@
-import { Card } from "@src/components/ui/card";
-import { Metadata } from "next";
+import Header from "@src/components/Header";
+import Hero from "@src/components/Hero";
+import About from "@src/components/About";
+import HowItWorks from "@src/components/HowItWorks"; 
 
-export const metadata: Metadata = {
-  title: "Home"
-}
 export default function Home() {
   return (
     <>
-    
-    <Card></Card>
+      <Header />
+      <main>
+        <Hero />
+        <About />
+        <HowItWorks /> {/* 2. Adicione a secção HowItWorks aqui */}
+        {/* As outras secções da nossa página virão a seguir */}
+      </main>
     </>
   );
 }
