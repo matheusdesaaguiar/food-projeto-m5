@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:5000/
+
+POST {{baseUrl}}donors/register
+Content-Type: application/json
+
+{
+  "name": "Restaurant ABC",
+  "email": "test@gmail.com",
+  "password": "123456",
+  "phone": "11999999999",
+  "address": "Rua Test, 123",
+  "cnpj": "12345678000100"
+}
