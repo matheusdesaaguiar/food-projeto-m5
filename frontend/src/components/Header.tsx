@@ -11,7 +11,7 @@ const Header = () => {
         <Link href="/" className="flex items-center gap-3">
           <LogoIcon />
           <span className="text-xl font-bold text-text-dark">
-            Aproveite<span className="text-primary">+</span>
+            Food <span className="text-primary">Rescue</span>
           </span>
         </Link>
 

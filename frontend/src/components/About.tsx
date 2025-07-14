@@ -30,13 +30,13 @@ const About = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
           >
             <h2 className="text-4xl font-extrabold tracking-tight text-text-dark sm:text-5xl">
-              O que é o <span className="text-primary">Aproveite+</span>?
+              O que é o <span className="text-primary">Food Rescue</span>?
             </h2>
             <p className="mt-6 text-lg leading-8 text-text-dark/80">
               No Brasil, toneladas de alimentos em perfeitas condições são desperdiçados todos os dias, enquanto milhões de pessoas enfrentam a insegurança alimentar. É um paradoxo que não podemos aceitar.
             </p>
             <p className="mt-4 text-lg leading-8 text-text-dark/80">
-              O <strong className="font-semibold text-text-dark">Aproveite+</strong> nasceu como uma ponte tecnológica para resolver este problema. Somos uma plataforma sem fins lucrativos que conecta diretamente quem tem alimentos excedentes — como restaurantes, supermercados e produtores — com quem mais precisa, como ONGs e bancos de alimentos.
+              O <strong className="font-semibold text-text-dark">Food Rescue</strong> nasceu como uma ponte tecnológica para resolver este problema. Somos uma plataforma sem fins lucrativos que conecta diretamente quem tem alimentos excedentes — como restaurantes, supermercados e produtores — com quem mais precisa, como ONGs e bancos de alimentos.
             </p>
             <p className="mt-4 text-lg leading-8 text-text-dark/80">
               Nossa missão é transformar o desperdício em esperança, criando uma comunidade forte, solidária e sustentável.

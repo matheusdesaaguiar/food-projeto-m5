@@ -25,7 +25,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-4 text-5xl font-extrabold tracking-tight text-text-dark lg:text-7xl"
           >
-            Aproveite<span className="text-primary">+</span>
+            Food <span className="text-primary">Rescue</span>
           </motion.h1>
 
           <motion.p 

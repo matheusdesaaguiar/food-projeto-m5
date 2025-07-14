@@ -8,7 +8,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Food-Rescue | Resgate de Alimentos",
+  title: "Food Rescue | Resgate de Alimentos",
   description: "Conectando doadores a quem precisa, combatendo o desperdício de alimentos.",
 };
 
