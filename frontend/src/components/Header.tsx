@@ -1,6 +1,6 @@
 "use client";
 
-import LogoIcon from './LogoIcon';
+import LogoIcon from './icons/LogoIcon';
 import Link from 'next/link';
 
 const Header = () => {
