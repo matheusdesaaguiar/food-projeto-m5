@@ -43,7 +43,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="mt-10 flex flex-col items-center gap-4 sm:flex-row md:items-start"
           >
-            <button className="w-full rounded-lg bg-primary px-8 py-3 font-bold text-white shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:bg-green-600 sm:w-auto">
+            <button className="w-full rounded-lg bg-primary px-8 py-3 font-bold text-dark shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 hover:bg-green-600 hover:text-white sm:w-auto">
               Seja um Doador
             </button>
             <button className="w-full font-semibold text-text-dark transition-colors hover:text-primary sm:w-auto">

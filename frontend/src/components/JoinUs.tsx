@@ -41,7 +41,7 @@ const JoinUs = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <button className="w-full rounded-lg bg-primary px-8 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-green-600">
+                <button className="w-full rounded-lg bg-primary px-8 py-3 font-bold text-dark transition-all duration-300 hover:scale-105 hover:bg-green-600 hover:text-white">
                   Quero Doar
                 </button>
               </div>
@@ -67,7 +67,7 @@ const JoinUs = () => {
                 </p>
               </div>
               <div className="mt-8">
-                <button className="w-full rounded-lg bg-accent px-8 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-lime-600">
+                <button className="w-full rounded-lg bg-accent px-8 py-3 font-bold text-dark transition-all duration-300 hover:scale-105 hover:bg-lime-600 hover:text-white">
                   Quero Receber
                 </button>
               </div>
