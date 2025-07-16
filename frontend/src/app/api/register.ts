@@ -3,12 +3,12 @@ import { z } from 'zod'
 import { registerSchema } from '../schemas/register'
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: "https://food-rescue-kfb4.onrender.com",
 })
 
 export async function registerDoador(data: z.infer<typeof registerSchema>) {
   try {
-    const response = await api.post('/doadores/register', {
+    const response = await api.post('/donors/register', {
       ...data,
       // Transformações específicas se necessário
       phone: data.phone.replace(/\D/g, ''),

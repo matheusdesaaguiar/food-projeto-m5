@@ -59,3 +59,71 @@ export const deleteDonor = async (req, res) => {
     res.status(500).json({ message: "Erro ao deletar doador", error: error.message });
   }
 };
+
+export const registerDonor = async (req, res) => {
+  try {
+    const { name, email, password, phone, address, cnpj } = req.body;
+
+    if (!name || !email || !password || !phone || !address || !cnpj) {
+      return res.status(400).json({
+        message: "Todos os campos são obrigatórios"
+      });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({
+        message: "A senha deve ter pelo menos 6 caracteres"
+      });
+    }
+
+    const result = await donorService.registerDonor(req.body);
+
+    res.status(201).json({
+      message: "Doador registrado com sucesso",
+      donor: result.donor,
+      token: result.token
+    });
+  } catch (error) {
+    console.error("Erro ao registrar doador:", error);
+
+    if (error.message === 'E-mail já cadastrado') {
+      return res.status(409).json({ message: error.message });
+    }
+
+    res.status(500).json({
+      message: "Erro ao registrar doador",
+      error: error.message
+    });
+  }
+};
+
+export const loginDonor = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Email e senha são obrigatórios"
+      });
+    }
+
+    const result = await donorService.loginDonor(email, password);
+
+    res.status(200).json({
+      message: "Login realizado com sucesso",
+      donor: result.donor,
+      token: result.token
+    });
+  } catch (error) {
+    console.error("Erro ao fazer login:", error);
+
+    if (error.message === 'Credenciais inválidas') {
+      return res.status(401).json({ message: error.message });
+    }
+
+    res.status(500).json({
+      message: "Erro ao fazer login",
+      error: error.message
+    });
+  }
+};

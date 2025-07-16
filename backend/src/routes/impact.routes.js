@@ -1,12 +1,16 @@
 import express from 'express';
 import impactController from '../controller/impact.controller.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/reports', impactController.createReport);
+// Rotas que requerem autenticação de doador
+router.post('/reports', authenticateToken, impactController.createReport);
+router.put('/reports/:id', authenticateToken, impactController.updateReport);
+router.delete('/reports/:id', authenticateToken, impactController.deleteReport);
+
+// Rotas públicas (visualização de impacto)
 router.get('/reports/:id', impactController.getReportById);
-router.put('/reports/:id', impactController.updateReport);
-router.delete('/reports/:id', impactController.deleteReport);
 router.get('/global', impactController.getGlobalImpact);
 router.post('/calculate', impactController.calculateEquivalence);
 

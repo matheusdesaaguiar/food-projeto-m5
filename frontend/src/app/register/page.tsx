@@ -1,20 +1,3 @@
-// import { Link } from "lucide-react"
-// import { Input } from "../../components/ui/input"
-
-// export default function RegisterPage() {
-//     return (
-//     // colocar a header aqui 
-//         <main>
-//             <h1>Cadastro</h1>
-
-
-//             <Input/>
-//             <Link href="/LINK-PARA-LOGIN">Já tem uma conta? Faça login</Link>
-//         </main>
-      
-//     // colocar footer aqui 
-//     )
-// }
 
 import { RegisterForm } from '../../components/RegisterForm'
 import { Card } from '../../components/ui/card'

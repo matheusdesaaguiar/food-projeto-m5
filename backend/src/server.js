@@ -10,9 +10,9 @@
     import beneficiaryRoutes from './routes/beneficiary.routes.js';
 
     const app = express();
-    const PORT = 3000;
+    const PORT = 5000;
 
-    app.use(corsMiddleware); 
+    app.use(corsMiddleware);
     app.use(express.json());
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     app.use('/impact', impactRoutes);
@@ -24,5 +24,5 @@
     app.listen(PORT, ()=>{
         console.log(`Servidor rodando na porta ${PORT}`);
     });
-    
+
     export default app;
