@@ -5,23 +5,24 @@ import {
   getDonorById,
   updateDonor,
   deleteDonor,
+  registerDonor,
+  loginDonor
 } from '../controller/donor.controller.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-// 🆕 Criar doador
+router.post('/register', registerDonor);
+router.post('/login', loginDonor);
+
 router.post('/', createDonor);
 
-// 📄 Listar todos
-router.get('/', getAllDonors);
+router.get('/', authenticateToken, getAllDonors);
 
-// 🔎 Buscar por ID
-router.get('/:id', getDonorById);
+router.get('/:id', authenticateToken, getDonorById);
 
-// ✏️ Atualizar por ID
-router.put('/:id', updateDonor);
+router.put('/:id', authenticateToken, updateDonor);
 
-// ❌ Deletar por ID
-router.delete('/:id', deleteDonor);
+router.delete('/:id', authenticateToken, deleteDonor);
 
 export default router;

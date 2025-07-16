@@ -1,6 +1,5 @@
-
-
-
+import prisma from '../config/database.js';
+import { verifyToken } from '../utils/jwt.js';
 
 export const authenticateToken = async (req, res, next) => {
   try {
