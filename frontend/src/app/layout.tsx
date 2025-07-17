@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from '../components/ui/sonner'
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
@@ -19,9 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+
       <body className={`${poppins.className} bg-background text-text-dark`}>
         {children}
+        <Toaster position="top-right" /> {/* Você pode customizar a posição */}
       </body>
     </html>
-  );
+  )
 }
+
