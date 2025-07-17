@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from '../components/ui/sonner'
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { ClientProvider } from "./client-provider";
 
 const poppins = Poppins({ 
   subsets: ["latin"],
@@ -22,7 +23,11 @@ export default function RootLayout({
     <html lang="pt-BR">
 
       <body className={`${poppins.className} bg-background text-text-dark`}>
+        <ClientProvider>
         {children}
+        </ClientProvider>
+        
+        {/* Toaster para notificações */}
         <Toaster position="top-right" /> {/* Você pode customizar a posição */}
       </body>
     </html>

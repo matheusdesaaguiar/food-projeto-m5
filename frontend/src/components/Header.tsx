@@ -17,12 +17,26 @@ const Header = () => {
 
         {/* Botões de Ação */}
         <div className="flex items-center gap-4">
-          <button className="hidden sm:block font-semibold text-text-dark transition-colors hover:text-green-600">
-            Login
-          </button>
-          <button className="rounded-lg bg-primary px-5 py-2.5 font-bold text-dark shadow-lg shadow-primary/20 transition-all duration-300 hover:bg-green-600 hover:text-white hover:scale-105">
+          <Link 
+                href="/foods"
+                className="hidden sm:block font-semibold text-text-dark transition-colors hover:text-green-600"
+              >
+                Alimentos
+          </Link>
+          <Link 
+                href="/login"
+                className="hidden sm:block font-semibold text-text-dark transition-colors hover:text-green-600"
+              >
+                Login
+          </Link>
+
+          <Link 
+            href="/register"
+            className="rounded-lg bg-primary px-5 py-2.5 font-bold text-dark shadow-lg shadow-primary/20 transition-all duration-300 hover:bg-green-600 hover:text-white hover:scale-105"
+          >
             Registro
-          </button>
+          </Link>
+
         </div>
       </div>
       <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
