@@ -1,5 +1,5 @@
 // src/Services/Foods.Services.js
-import prisma from "../utils/bdConfig.js";
+import prisma from "../config/database.js";
 
 const createFood = async (foodData) => {
   const { name, validity, quantity, category, description } = foodData;

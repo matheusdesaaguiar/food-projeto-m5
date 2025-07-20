@@ -11,22 +11,16 @@ import { Input } from "@src/components/ui/input"
 import { Label } from "@src/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@src/components/ui/card"
 import { Alert, AlertDescription } from "@src/components/ui/alert"
-import { loginSchema, type LoginFormData, type DonorResponse } from "@src/lib/validations/auth"
+import { loginSchema, type LoginFormData, type DonorResponse } from "@src/app/schemas/login"
 import { useRouter } from "next/navigation"
 
-function redirecionar() {
-  const router = useRouter();
-
-  const handleRedirect = () => {
-    router.push('/alimentos');
-  };
-}
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
   const [loggedDonor, setLoggedDonor] = useState<DonorResponse | null>(null)
+  const router = useRouter();
 
   const {
     register,
@@ -45,9 +39,13 @@ export default function LoginPage() {
       const response = await axios.post("", data)
 
       if (response.data.success) {
+        const donor = response.data.donor
+        const token = response.data.token || donor?.id
         setMessage({ type: "success", text: response.data.message })
-        setLoggedDonor(response.data.donor)
-
+        setLoggedDonor(donor)
+        localStorage.setItem("token", token)
+        localStorage.setItem("donor", JSON.stringify(donor))
+        router.push('/alimentos')
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -131,8 +129,9 @@ export default function LoginPage() {
               </div>
 
               <Button
-              onClick={redirecionar}
+              type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2.5 border-[2] border-primary transition-all duration-300"
+                
                 disabled={isLoading}
               >
                 {isLoading ? "Entrando..." : "Entrar"}

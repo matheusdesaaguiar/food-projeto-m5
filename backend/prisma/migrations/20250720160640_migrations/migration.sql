@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "NotificationType" AS ENUM ('sent', 'received');
 
+-- CreateEnum
+CREATE TYPE "FoodCategory" AS ENUM ('NON_PERISHABLE', 'PERISHABLE', 'BAKERY', 'BEVERAGE', 'DESSERT', 'READY_TO_EAT', 'SPECIAL_DIET');
+
 -- CreateTable
 CREATE TABLE "Donor" (
     "id" TEXT NOT NULL,
@@ -46,7 +49,7 @@ CREATE TABLE "Food" (
     "collectionPointsId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "validity" TIMESTAMP(3) NOT NULL,
-    "quantity" INTEGER NOT NULL,
+    "quantity" "FoodCategory" NOT NULL,
     "category" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

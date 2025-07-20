@@ -1,5 +1,5 @@
 // 📦 Service responsável pela lógica de negócios dos doadores
-import prisma from '../utils/bdConfig.js';
+import prisma from '../config/database.js';
 import { hashPassword, comparePassword } from '../utils/bcrypt.js';
 import { generateToken } from '../utils/jwt.js';
 

@@ -1,4 +1,4 @@
-import { prisma } from '../utils/bdConfig.js';
+import prisma from '../config/database.js';
 
 const getAll = async () => {
   return await prisma.collectionPoints.findMany({

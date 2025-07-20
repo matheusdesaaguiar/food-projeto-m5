@@ -10,7 +10,7 @@ const getAll = async (req, res) => {
     }
 };
 
-getById = async (req, res) => {
+const getById = async (req, res) => {
     try {
         const id = req.params.id;
         const point = await service.getById(id);
@@ -77,8 +77,9 @@ const remove = async (req, res) => {
 
 
 // exportando as funções
-export default {
+export {
   getAll,
+  getById,
   create,
   update,
   remove,

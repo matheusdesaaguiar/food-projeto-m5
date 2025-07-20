@@ -45,6 +45,17 @@ enum NotificationType {
   received
 }
 
+enum FoodCategory {
+  NON_PERISHABLE
+  PERISHABLE
+  BAKERY
+  BEVERAGE
+  DESSERT
+  READY_TO_EAT
+  SPECIAL_DIET
+}
+
+
 model Food {
   id          String     @id @default(uuid())
   donorId     String
@@ -53,12 +64,14 @@ model Food {
   collectionPoints    CollectionPoints @relation(fields: [collectionPointsId], references: [id])
   name       String
   validity    DateTime
-  quantity Int
+  quantity FoodCategory
   category  String
   description   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+
 
 model ImpactReport {
   id          String      @id @default(uuid())

@@ -1,5 +1,6 @@
 // src/Controllers/FoodController.js
 import Food from "../services/Foods.service.js";
+import { foodCategories } from "../utils/foodCategory.js";
 
 const createFood = async (req, res) => {
   try {
@@ -7,6 +8,15 @@ const createFood = async (req, res) => {
     if (!name || !validity || !quantity || !category || !description) {
       return res.status(400).json({ error: "Todos os campos são obrigatórios." });
     }
+
+    if (!Object.values(foodCategories).includes(category)) {
+      return res.status(400).json({ error: "Categoria inválida." });
+    }
+
+    if (isNaN(quantity) || quantity <= 0) {
+      return res.status(400).json({ error: "Quantidade deve ser um número positivo." });
+    }
+
     const food = await Food.createFood({ name, validity, quantity, category, description });
     res.status(201).json({
       message: "O alimento foi criado com sucesso",
