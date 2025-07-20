@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { registerSchema } from '../schemas/register'
 
 const api = axios.create({
-  baseURL: "https://food-rescue-kfb4.onrender.com",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
 })
 
 export async function registerDoador(data: z.infer<typeof registerSchema>) {
