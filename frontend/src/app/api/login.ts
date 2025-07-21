@@ -1,5 +1,5 @@
 import axios from "axios";
-import { email, z } from "zod";
+import { z } from "zod";
 import { loginSchema } from "../schemas/login";
 
 const api = axios.create({

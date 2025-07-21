@@ -12,7 +12,7 @@ export type LoginFormData = z.infer<typeof loginSchema>
 
 // Tipo para o modelo Donor
 export interface Donor {
-  id: number
+  id: string
   name: string
   email: string
   password: string

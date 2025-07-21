@@ -4,23 +4,25 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios from "axios"
-import { Eye, EyeOff, Leaf, Mail, Lock, Building2 } from "lucide-react"
+import { Eye, EyeOff, Leaf, Mail, Lock } from "lucide-react"
 
 import { Button } from "@src/components/ui/button"
 import { Input } from "@src/components/ui/input"
 import { Label } from "@src/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@src/components/ui/card"
 import { Alert, AlertDescription } from "@src/components/ui/alert"
-import { loginSchema, type LoginFormData, type DonorResponse } from "@src/app/schemas/login"
+import { loginSchema, type LoginFormData} from "@src/app/schemas/login"
 import { useRouter } from "next/navigation"
+import { useDonor } from "@src/contexts/DonorContext"
+
 
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
-  const [loggedDonor, setLoggedDonor] = useState<DonorResponse | null>(null)
   const router = useRouter();
+  const donorContext = useDonor();
 
   const {
     register,
@@ -42,9 +44,7 @@ export default function LoginPage() {
         const donor = response.data.donor
         const token = response.data.token || donor?.id
         setMessage({ type: "success", text: response.data.message })
-        setLoggedDonor(donor)
-        localStorage.setItem("token", token)
-        localStorage.setItem("donor", JSON.stringify(donor))
+        donorContext.login(donor, token);
         router.push('/alimentos')
       }
     } catch (error) {
