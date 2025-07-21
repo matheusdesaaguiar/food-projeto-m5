@@ -629,6 +629,8 @@ const swaggerDocument = {
           },
         },
       },
+    },
+    "/donors/register": {
       post: {
         summary: "Cadastrar novo doador",
         tags: ["Doadores"],

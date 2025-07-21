@@ -1,55 +1,51 @@
 // src/Services/Foods.Services.js
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import prisma from "../config/database.js";
 
-const createFood = async (foodData, prisma = prismaClient) => {
-  const { name, category, expirationDate } = foodData;
+const createFood = async (foodData) => {
+  const { name, validity, quantity, category, description } = foodData;
 
   return await prisma.food.create({
     data: {
       name,
+      validity: new Date(validity),
+      quantity,
       category,
-      expirationDate: new Date(expirationDate) // <- aqui está o ponto
+      description,
     }
   });
 };
 
-const getAllFoods = (client = prisma) => {
-  return client.food.findMany();
+const getAllFoods = () => {
+  return prisma.food.findMany();
 };
 
-const getFoodById = (id, client = prisma) => {
-  return client.food.findUnique({ where: { id } });
+const getFoodById = (id) => {
+  return prisma.food.findUnique({ where: { id } });
 };
 
-const updateFood = (id, data, client = prisma) => {
-  return client.food.update({
+const updateFood = (id, data) => {
+  const { name, validity, quantity, category, description } = data;
+  return prisma.food.update({
     where: { id },
-    data,
+    data: {
+      name,
+      validity: new Date(validity),
+      quantity,
+      category,
+      description,
+    }
   });
 };
 
-const deleteFood = (id, client = prisma) => {
-  return client.food.delete({
+const deleteFood = (id) => {
+  return prisma.food.delete({
     where: { id },
   });
 };
 
-const getFoodByCategory = (category, client = prisma) => {
-  return client.food.findMany({
+const getFoodByCategory = (category) => {
+  return prisma.food.findMany({
     where: { category },
-  });
-};
-
-const getFoodByName = (name, client = prisma) => {
-  return client.food.findMany({
-    where: { name: { contains: name, mode: "insensitive" } },
-  });
-};
-
-const getFoodByExpirationDate = (date, client = prisma) => {
-  return client.food.findMany({
-    where: { expirationDate: new Date(date) },
   });
 };
 
@@ -59,7 +55,5 @@ export default {
   getFoodById,
   updateFood,
   deleteFood,
-  getFoodByCategory,
-  getFoodByName,
-  getFoodByExpirationDate,
+  getFoodByCategory
 };

@@ -1,11 +1,15 @@
 -- CreateEnum
 CREATE TYPE "NotificationType" AS ENUM ('sent', 'received');
 
+-- CreateEnum
+CREATE TYPE "FoodCategory" AS ENUM ('NON_PERISHABLE', 'PERISHABLE', 'BAKERY', 'BEVERAGE', 'DESSERT', 'READY_TO_EAT', 'SPECIAL_DIET');
+
 -- CreateTable
 CREATE TABLE "Donor" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "cnpj" TEXT NOT NULL,
@@ -16,23 +20,8 @@ CREATE TABLE "Donor" (
 );
 
 -- CreateTable
-CREATE TABLE "Beneficiary" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "cpf" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "Beneficiary_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "CollectionPoints" (
-    "id" SERIAL NOT NULL,
-    "beneficiaryId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
@@ -45,9 +34,7 @@ CREATE TABLE "CollectionPoints" (
 
 -- CreateTable
 CREATE TABLE "NotificationEngagement" (
-    "id" SERIAL NOT NULL,
-    "foodId" INTEGER NOT NULL,
-    "beneficiaryId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
     "NotificationType" "NotificationType" NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -57,12 +44,12 @@ CREATE TABLE "NotificationEngagement" (
 
 -- CreateTable
 CREATE TABLE "Food" (
-    "id" SERIAL NOT NULL,
-    "donorId" INTEGER NOT NULL,
-    "collectionPointsId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "donorId" TEXT NOT NULL,
+    "collectionPointsId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "validity" TIMESTAMP(3) NOT NULL,
-    "quantity" INTEGER NOT NULL,
+    "quantity" "FoodCategory" NOT NULL,
     "category" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -73,7 +60,7 @@ CREATE TABLE "Food" (
 
 -- CreateTable
 CREATE TABLE "ImpactReport" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "donorId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
@@ -84,20 +71,11 @@ CREATE TABLE "ImpactReport" (
     CONSTRAINT "ImpactReport_pkey" PRIMARY KEY ("id")
 );
 
--- AddForeignKey
-ALTER TABLE "CollectionPoints" ADD CONSTRAINT "CollectionPoints_beneficiaryId_fkey" FOREIGN KEY ("beneficiaryId") REFERENCES "Beneficiary"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "NotificationEngagement" ADD CONSTRAINT "NotificationEngagement_foodId_fkey" FOREIGN KEY ("foodId") REFERENCES "Food"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "NotificationEngagement" ADD CONSTRAINT "NotificationEngagement_beneficiaryId_fkey" FOREIGN KEY ("beneficiaryId") REFERENCES "Beneficiary"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+-- CreateIndex
+CREATE UNIQUE INDEX "Donor_email_key" ON "Donor"("email");
 
 -- AddForeignKey
 ALTER TABLE "Food" ADD CONSTRAINT "Food_donorId_fkey" FOREIGN KEY ("donorId") REFERENCES "Donor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Food" ADD CONSTRAINT "Food_collectionPointsId_fkey" FOREIGN KEY ("collectionPointsId") REFERENCES "CollectionPoints"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ImpactReport" ADD CONSTRAINT "ImpactReport_donorId_fkey" FOREIGN KEY ("donorId") REFERENCES "Donor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

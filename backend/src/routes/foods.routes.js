@@ -9,8 +9,8 @@ router.put('/update/:id', authenticateToken, foodController.updateFood);
 router.delete('/delete/:id', authenticateToken, foodController.deleteFood);
 
 // Rotas públicas (beneficiários podem acessar)
-router.get('/all', foodController.getAllFoods);
-router.get('/byid/:id', foodController.getFoodById);
-router.get('/category/:id', foodController.getFoodByCategory);
+router.get('/', foodController.getAllFoods);
+router.get('/:id', foodController.getFoodById);
+router.get('/category', foodController.getFoodByCategory);
 
 export default router;

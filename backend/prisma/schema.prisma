@@ -8,9 +8,8 @@ datasource db {
 }
 
 model Donor {
-  id          Int     @id @default(autoincrement())
+  id          String  @id @default(uuid())
   Food        Food[]  @relation("DonorFood")
-  ImpactReport ImpactReport[]
   name       String
   email       String  @unique
   password    String
@@ -21,24 +20,9 @@ model Donor {
   updatedAt   DateTime @updatedAt
 }
 
-model Beneficiary {
-  id          Int      @id @default(autoincrement())
-  collectionPoints   CollectionPoints[]
-  notificationEngagements NotificationEngagement[]
-  name       String
-  email       String
-  phone    String
-  address    String
-  cpf         String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
 model CollectionPoints {
-  id          Int     @id @default(autoincrement())
+  id          String     @id @default(uuid())
   food        Food[]
-  beneficiaryId Int
-  beneficiary      Beneficiary @relation(fields: [beneficiaryId], references: [id])
   name        String
   address   String
   phone    String
@@ -50,11 +34,7 @@ model CollectionPoints {
 //--------------------------------------------------------------------------------//
 
 model NotificationEngagement {
-  id Int @id @default(autoincrement())
-  foodId Int
-  food Food @relation(fields: [foodId], references: [id])
-  beneficiary Beneficiary @relation(fields: [beneficiaryId], references: [id])
-  beneficiaryId Int
+  id String @id @default(uuid())
   NotificationType NotificationType
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -65,26 +45,37 @@ enum NotificationType {
   received
 }
 
+enum FoodCategory {
+  NON_PERISHABLE
+  PERISHABLE
+  BAKERY
+  BEVERAGE
+  DESSERT
+  READY_TO_EAT
+  SPECIAL_DIET
+}
+
+
 model Food {
-  id          Int     @id @default(autoincrement())
-  donorId     Int
+  id          String     @id @default(uuid())
+  donorId     String
   donor       Donor   @relation("DonorFood", fields: [donorId], references: [id])
-  collectionPointsId  Int
+  collectionPointsId  String 
   collectionPoints    CollectionPoints @relation(fields: [collectionPointsId], references: [id])
-  notificationEngagements NotificationEngagement[]
   name       String
   validity    DateTime
-  quantity Int
+  quantity FoodCategory
   category  String
   description   String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
+
+
 model ImpactReport {
-  id          Int      @id @default(autoincrement())
+  id          String      @id @default(uuid())
   donorId Int
-  donor    Donor @relation(fields: [donorId], references: [id])
   title       String
   description String
   savedFoodKg Float

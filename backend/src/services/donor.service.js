@@ -1,13 +1,7 @@
 // 📦 Service responsável pela lógica de negócios dos doadores
-import { PrismaClient } from '@prisma/client';
+import prisma from '../config/database.js';
 import { hashPassword, comparePassword } from '../utils/bcrypt.js';
 import { generateToken } from '../utils/jwt.js';
-
-const prisma = new PrismaClient();
-
-export const createDonor = async (data) => {
-  return await prisma.donor.create({ data });
-};
 
 export const getAllDonors = async () => {
   return await prisma.donor.findMany();
@@ -16,6 +10,12 @@ export const getAllDonors = async () => {
 export const getDonorById = async (id) => {
   return await prisma.donor.findUnique({
     where: { id: parseInt(id) },
+  });
+};
+
+export const getDonorByEmail = async (email) => {
+  return await prisma.donor.findUnique({
+    where: { email: email }
   });
 };
 

@@ -1,6 +1,5 @@
 import express from 'express';
 import {
-  createDonor,
   getAllDonors,
   getDonorById,
   updateDonor,
@@ -15,9 +14,7 @@ const router = express.Router();
 router.post('/register', registerDonor);
 router.post('/login', loginDonor);
 
-router.post('/', createDonor);
-
-router.get('/', authenticateToken, getAllDonors);
+router.get('/',  getAllDonors);
 
 router.get('/:id', authenticateToken, getDonorById);
 
