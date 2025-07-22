@@ -15,7 +15,7 @@ export default function Home() {
         <JoinUs />
         <CallToActions />
       </main>
-      <Footer />
+     
     </>
   );
 }
