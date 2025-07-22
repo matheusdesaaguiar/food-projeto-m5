@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@src/components/Header";
 import { DonorProvider } from "@src/contexts/DonorContext";
+import Footer from "@src/components/Footer";
 
 const poppins = Poppins({ 
   subsets: ["latin"],
@@ -25,10 +26,10 @@ export default function RootLayout({
 
       <body className={`${poppins.className} bg-background text-text-dark`}>
         <DonorProvider>
-          <Header />
+          <Header/>
           {children}
         </DonorProvider>
-        
+         <Footer />
         <Toaster position="top-right" /> {/* Você pode customizar a posição */}
       </body>
     </html>
