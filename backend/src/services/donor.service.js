@@ -38,7 +38,7 @@ export const deleteDonor = async (id) => {
 export const registerDonor = async (donorData) => {
   const { email, password, ...otherData } = donorData;
 
-  const existingDonor = await prisma.donor.findUnique({
+  const existingDonor = await prisma.donor.findFirst({
     where: { email }
   });
 
@@ -77,7 +77,7 @@ export const registerDonor = async (donorData) => {
 };
 
 export const loginDonor = async (email, password) => {
-  const donor = await prisma.donor.findUnique({
+  const donor = await prisma.donor.findFirst({
     where: { email }
   });
 
