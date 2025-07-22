@@ -29,10 +29,7 @@ const createFood = async (req, res) => {
 const getAllFoods = async (req, res) => {
   try {
     const foods = await Food.getAllFoods();
-    res.status(200).json({
-      message: "Todos os alimentos foram recebidos com sucesso",
-      foods,
-    });
+    res.status(200).json(foods);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
