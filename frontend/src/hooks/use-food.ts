@@ -27,7 +27,7 @@ export const useFood = () => {
   const fetchFoods = async () => {
     setLoading(true);
     try {
-      const data = await request<Food[]>('get', '/api/foods'); // Adicionando tipo genérico
+      const data = await request<Food[]>('get', '/foods'); // Adicionando tipo genérico
       setFoods(data || []);
     } finally {
       setLoading(false);
@@ -35,7 +35,7 @@ export const useFood = () => {
   };
 
   const addFood = async (values: FoodFormValues): Promise<boolean> => {
-    const response = await request<Food>('post', '/api/foods', values); // Adicionando tipo genérico
+    const response = await request<Food>('post', '/foods', values); // Adicionando tipo genérico
     if (response) {
       setFoods(prev => [...prev, response]);
       return true;
