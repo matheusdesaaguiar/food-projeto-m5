@@ -16,6 +16,7 @@ import { loginSchema, type LoginFormData } from "@src/app/schemas/login"
 import { useRouter } from "next/navigation"
 import { useDonor } from "@src/contexts/DonorContext"
 import Link from "next/link"
+import { loginDoador, storeToken } from "@src/app/api/login"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -38,18 +39,17 @@ export default function LoginPage() {
     setMessage(null)
 
     try {
-      const response = await axios.post("", data)
+      const response = await loginDoador(data);
 
       if (response.data.success) {
         const donor = response.data.donor
         const token = response.data.token || donor?.id
         setMessage({ type: "success", text: response.data.message })
         
-        // Pequeno delay para mostrar a mensagem de sucesso
         await new Promise(resolve => setTimeout(resolve, 800))
-        
+        storeToken(token)
         donorContext.login(donor, token)
-        router.push('/alimentos')
+        router.push("/alimentos");
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
